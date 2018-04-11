@@ -3,12 +3,25 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <h:head>
-    <title>Iniciando com JSF</title>
+<title>Iniciando com JSF</title>
 </h:head>
 <h:body>
-    Hello from #{helloWorldBean.name}.
+    <h1>Hello from JSF</h1>
+    <h:form>
+    <h:outputLabel value="Digite seu nome  " for="nome"/>
+    <h:inputText value="#{controladorPessoa.pessoa.nome}"
+        id="nome"/>
+    <h:commandButton action="#{controladorPessoa.cadastrar()}"
+        value="Cadastrar" />
+
+    <!--h:dataTable value="#{controladorPessoa.pessoas}" var="pessoa">
+    <p>#{pessoa}</p>
+    <h:dataTable-->
+<h:commandButton action="index2" value="Próxima >"/>
+</h:form>
 </h:body>
 </html>

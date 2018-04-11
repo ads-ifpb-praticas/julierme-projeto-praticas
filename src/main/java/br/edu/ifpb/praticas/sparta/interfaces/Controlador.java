@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifpb.praticas.sparta.controladores;
-
-import java.io.Serializable;
-import javax.inject.Named;
+package br.edu.ifpb.praticas.sparta.interfaces;
 
 /**
  *
  * @author Sinbad Heinstein
  */
-@Named
-public class ControladorAtendimento implements Serializable{
+public interface Controlador {
+    
+    public String fazerLogin();
     
 }

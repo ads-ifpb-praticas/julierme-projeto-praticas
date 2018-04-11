@@ -3,8 +3,8 @@ package br.edu.ifpb.praticas.sparta.interfaces;
 import br.edu.ifpb.praticas.sparta.entidades.Atendente;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.SQLException;
 
 public interface AtendenteDAO{
 

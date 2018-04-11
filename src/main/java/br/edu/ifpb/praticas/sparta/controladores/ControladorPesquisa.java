@@ -6,11 +6,13 @@
 package br.edu.ifpb.praticas.sparta.controladores;
 
 import java.io.Serializable;
+import javax.inject.Named;
 
 /**
  *
  * @author Sinbad Heinstein
  */
+@Named
 public class ControladorPesquisa implements Serializable{
     
 }

@@ -16,10 +16,10 @@ public class ClienteDAO implements br.edu.ifpb.praticas.sparta.interfaces.Client
         session = (Session) conexao.novaConexao();
     }
 
-    public void cadastrarCliente(int id, String nome) {
+    public void cadastrarCliente(int id, String nome, String email) {
         try {
             conexao = (Conexao) new ClienteDAO();
-            String cql = "INSERT INTO cliente (id, nome) VALUES (" + id + "," + nome + ");";
+            String cql = "INSERT INTO cliente (id, nome, email) VALUES (" + id + "," + nome + "," + email + ");";
             session.execute(cql);
             conexao.fecharConexao();
         } catch (SQLException ex) {
@@ -27,10 +27,10 @@ public class ClienteDAO implements br.edu.ifpb.praticas.sparta.interfaces.Client
         }
     }
 
-    public void removerCliente(int id) {
+    public void removerCliente(String email) {
         try {
             conexao = (Conexao) new ClienteDAO();
-            String cql = "DELETE FROM cliente WHERE id = " + id + ";";
+            String cql = "DELETE FROM cliente WHERE email = " + email + ";";
             session.execute(cql);
             conexao.fecharConexao();
         } catch (SQLException ex) {

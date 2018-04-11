@@ -5,10 +5,9 @@
  */
 package br.edu.ifpb.praticas.sparta.controladores;
 
-import br.edu.ifpb.praticas.sparta.entidades.Atendente;
+import br.edu.ifpb.praticas.sparta.interfaces.Controlador;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -17,19 +16,10 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class ControladorAtendente implements Serializable{
+public class ControladorAtendente implements Controlador,Serializable{
     
-    @Inject
-    private Atendente funcionario;
-    private Atendente ativo;
-
-    public Atendente getFuncionario() { return funcionario; }
-    public void setFuncionario(Atendente funcionario) { this.funcionario = funcionario; }
-    public Atendente getAtivo() { return ativo; }
-    public void setAtivo(Atendente ativo) { this.ativo = ativo; }
-
     public String fazerLogin(){
-        return "home";
+        return "index";
     }
     
 }

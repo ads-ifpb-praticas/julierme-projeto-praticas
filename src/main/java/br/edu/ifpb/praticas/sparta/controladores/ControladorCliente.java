@@ -5,12 +5,21 @@
  */
 package br.edu.ifpb.praticas.sparta.controladores;
 
+import br.edu.ifpb.praticas.sparta.interfaces.Controlador;
 import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author Sinbad Heinstein
  */
-public class ControladorCliente implements Serializable{
+@Named
+@SessionScoped
+public class ControladorCliente implements Controlador,Serializable{
+    
+    public String fazerLogin() {
+        return "index";
+    }
     
 }
