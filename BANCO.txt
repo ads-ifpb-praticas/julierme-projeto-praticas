@@ -1,0 +1,40 @@
+﻿// Banco de Dados: Cassandra versão 3.11.1 //
+// Necessita do Python 2.7 instalado no dispositivo //
+
+CREATE TABLE Atendente(
+	int matricula PRIMARY KEY,
+	text nome NOT NULL,
+	Date atendimento NOT NULL,
+	Time hora_chegada NOT NULL,
+	Time hora_saida NOT NULL
+) WITH comment='Registro de atendentes';
+
+CREATE TABLE Cliente(
+	int id PRIMARY KEY,
+	text nome NOT NULL,
+	text email NOT NULL
+) WITH comment='Registro de clientes';
+
+CREATE TABLE Servico(
+	int codigo PRIMARY KEY,
+	int duracao NOT NULL,
+	text categoria NOT NULL
+) WITH comment='Registro dos servicos';
+
+CREATE TABLE Atendimento(
+	int codigo,
+	int cliente,
+	int tiposervico NOT NULL,
+	Date data NOT NULL,
+	Time horario NOT NULL,
+	boolean confirmado,
+	PRIMARY KEY (codigo, cliente)
+) WITH comment='Registro de atendimentos';
+
+CREATE TABLE Pesquisa(
+	int id,
+	int atendimento,
+	boolean respondido NOT NULL,
+	float nota,
+	PRIMARY KEY (id, atendimento)
+) WITH comment='Registro de pesquisas realizadas';

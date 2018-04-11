@@ -16,11 +16,11 @@ public class ServicoDAO implements br.edu.ifpb.praticas.sparta.interfaces.Servic
         session = (Session) conexao.novaConexao();
     }
 
-    public void cadastrarServico(int codigo, String tipo, int duracao, String categoria) {
+    public void cadastrarServico(int codigo, int duracao, String categoria) {
         try {
             conexao = (Conexao) new ServicoDAO();
-            String cql = "INSERT INTO atendente (codigo,tipo,duracao,categoria)"
-                    + " VALUES (" + codigo + "," + tipo + "," + duracao + "," + categoria + ");";
+            String cql = "INSERT INTO atendente (codigo,duracao,categoria)"
+                    + " VALUES (" + codigo + "," + duracao + "," + categoria + ");";
             session.execute(cql);
             conexao.fecharConexao();
         } catch (SQLException ex) {

@@ -18,27 +18,29 @@ public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.At
         session = (Session) conexao.novaConexao();
     }
 
-    public void agendar(int atentente, int cliente, String tipo, Date data, Time horario) {
+    public int agendar(int atentente, int cliente, String tipo, Date data, Time horario) {
         try {
             conexao = (Conexao) new AtendimentoDAO();
             String cql = "INSERT INTO agendamento (matricula,id,tipo,data,horario)"
                     + " VALUES (" + atentente + "," + cliente + "," + tipo + "," + data + "," + horario + ");";
             session.execute(cql);
             conexao.fecharConexao();
+            return 1;
         } catch (SQLException ex) {
             Logger.getLogger(AtendimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } return 0;
     }
 
-    public void cancelar(int cliente) {
+    public int cancelar(int cliente, Date data, Time horario) {
         try {
             conexao = (Conexao) new AtendimentoDAO();
-            String cql = "DELETE FROM agendamento WHERE id = " + cliente + ";";
+            String cql = "DELETE FROM agendamento WHERE id = " + cliente + " AND data = " + data + "AND horario = " + horario + ";";
             session.execute(cql);
             conexao.fecharConexao();
+            return 1;
         } catch (SQLException ex) {
             Logger.getLogger(AtendimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } return 0;
     }
 
 }
