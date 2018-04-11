@@ -7,17 +7,17 @@ public class Atendimento {
 
     private int codigo;
     private int cliente;
-    private String tipo;
+    private int tiposervico;
     private Date data;
     private Time horario;
     private boolean confirmado;
 
     public Atendimento(){ }
 
-    public Atendimento(int codigo, int cliente, String tipo, Date data, Time horario, boolean confirmado){
+    public Atendimento(int codigo, int cliente, int tiposervico, Date data, Time horario, boolean confirmado){
         this.codigo = codigo;
         this.cliente = cliente;
-        this.tipo = tipo;
+        this.tiposervico = tiposervico;
         this.data = data;
         this.horario = horario;
         this.confirmado = confirmado;
@@ -27,8 +27,8 @@ public class Atendimento {
     public void setCodigo(int codigo) {this.codigo = codigo;}
     public int getCliente() {return cliente;}
     public void setCliente(int cliente) {this.cliente = cliente;}
-    public String getTipo() {return tipo;}
-    public void setTipo(String tipo) {this.tipo = tipo;}
+    public int getTipoServico() { return tiposervico; }
+    public void setTipoServico(int tiposervico) { this.tiposervico = tiposervico; }
     public Date getData() {return data;}
     public void setData(Date data) {this.data = data;}
     public Time getHorario() {return horario;}
