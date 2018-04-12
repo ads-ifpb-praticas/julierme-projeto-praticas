@@ -1,4 +1,4 @@
-package br.edu.ifpb.praticas.sparta.dao;
+package br.edu.ifpb.praticas.sparta.daos;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
 import com.datastax.driver.core.Session;

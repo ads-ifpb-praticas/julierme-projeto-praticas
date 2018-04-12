@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifpb.praticas.sparta.objneg;
+package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.interfaces.PesquisaDAO;
 

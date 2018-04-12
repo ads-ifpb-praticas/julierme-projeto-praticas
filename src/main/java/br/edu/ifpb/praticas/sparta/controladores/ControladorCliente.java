@@ -6,6 +6,7 @@
 package br.edu.ifpb.praticas.sparta.controladores;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Controlador;
+import br.edu.ifpb.praticas.sparta.services.ClienteService;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -18,7 +19,11 @@ import javax.inject.Named;
 @SessionScoped
 public class ControladorCliente implements Controlador,Serializable{
     
+    private ClienteService service;
+    
     public String fazerLogin() {
+        boolean logado = service.logar();
+        if (logado == true){ return "caos"; }
         return "index";
     }
     
