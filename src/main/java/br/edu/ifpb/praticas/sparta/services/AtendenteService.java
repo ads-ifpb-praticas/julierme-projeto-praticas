@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifpb.praticas.sparta.objneg;
+package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Atendente;
 import br.edu.ifpb.praticas.sparta.interfaces.AtendenteDAO;
@@ -42,6 +42,10 @@ public class AtendenteService {
             Logger.getLogger(AtendenteService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public boolean logar(){
+        return true;
     }
     
 }

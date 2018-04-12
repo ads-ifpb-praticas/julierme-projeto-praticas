@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifpb.praticas.sparta.objneg;
+package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Cliente;
 import br.edu.ifpb.praticas.sparta.interfaces.ClienteDAO;
@@ -21,6 +21,6 @@ public class ClienteService {
     public void add(int id, String nome, String email){ clientedao.cadastrarCliente(id,nome,email); }
     public void remove(String email){ clientedao.removerCliente(email); }
     public Cliente buscar(String nome) { return clientedao.buscarCliente(nome); }
-    public boolean logar(String email){ return true; }
+    public boolean logar(){ return true; }
     
 }
