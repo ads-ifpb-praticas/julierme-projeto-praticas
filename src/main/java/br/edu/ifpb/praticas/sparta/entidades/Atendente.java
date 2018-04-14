@@ -2,9 +2,15 @@ package br.edu.ifpb.praticas.sparta.entidades;
 
 import java.sql.Date;
 import java.sql.Time;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Atendente {
 
+    @Id
+    @GeneratedValue
     private int matricula;
     private String nome;
     private Date atendimento;

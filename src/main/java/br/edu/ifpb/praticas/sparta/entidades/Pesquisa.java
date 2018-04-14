@@ -1,7 +1,14 @@
 package br.edu.ifpb.praticas.sparta.entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Pesquisa {
 
+    @Id
+    @GeneratedValue
     private int id;
     private int atendimento;
     private boolean respondido;

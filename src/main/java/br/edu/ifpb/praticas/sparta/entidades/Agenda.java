@@ -1,10 +1,12 @@
 package br.edu.ifpb.praticas.sparta.entidades;
 
 import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Agenda {
 
     @Id

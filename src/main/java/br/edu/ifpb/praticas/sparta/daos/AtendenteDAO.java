@@ -2,17 +2,17 @@ package br.edu.ifpb.praticas.sparta.daos;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
 import br.edu.ifpb.praticas.sparta.entidades.Atendente;
-import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-
-import javax.sql.RowSetInternal;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.persistence.PersistenceContext;
 
+@RequestScoped
 public class AtendenteDAO implements br.edu.ifpb.praticas.sparta.interfaces.AtendenteDAO{
 
+    @PersistenceContext()
     private Conexao conexao;
     private Session session;
 

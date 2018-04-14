@@ -1,7 +1,14 @@
 package br.edu.ifpb.praticas.sparta.entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Servico {
 
+    @Id
+    @GeneratedValue
     private int codigo;
     private String tipo;
     private int duracao;

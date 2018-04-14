@@ -1,7 +1,14 @@
 package br.edu.ifpb.praticas.sparta.entidades;
 
-public class Cliente {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Cliente {
+    
+    @Id
+    @GeneratedValue
     private int id;
     private String nome;
     private String email;

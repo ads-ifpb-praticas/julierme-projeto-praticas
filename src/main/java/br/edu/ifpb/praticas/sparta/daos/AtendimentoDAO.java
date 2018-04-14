@@ -8,9 +8,13 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
+import javax.persistence.PersistenceContext;
 
+@RequestScoped
 public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.AtendimentoDAO {
 
+    @PersistenceContext()
     private Conexao conexao;
     private Session session;
 

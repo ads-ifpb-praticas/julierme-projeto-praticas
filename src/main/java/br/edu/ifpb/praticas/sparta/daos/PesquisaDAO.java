@@ -10,13 +10,17 @@ import com.datastax.driver.core.Session;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author Sinbad Heinstein
  */
+@RequestScoped
 public class PesquisaDAO implements br.edu.ifpb.praticas.sparta.interfaces.PesquisaDAO{
     
+    @PersistenceContext()
     private Conexao conexao;
     private Session session;
 
