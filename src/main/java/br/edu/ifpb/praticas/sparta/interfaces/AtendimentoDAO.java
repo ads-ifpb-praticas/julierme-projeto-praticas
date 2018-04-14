@@ -5,7 +5,7 @@ import java.sql.Time;
 
 public interface AtendimentoDAO {
 
-    public int agendar(int atentente, int cliente, String tipo, Date data, Time horario);
+    public int agendar(int atentente, int cliente, int tipo, Date data, Time horario);
     public int cancelar(int cliente, Date data, Time horario);
 
 }

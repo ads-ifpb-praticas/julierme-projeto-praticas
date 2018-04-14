@@ -7,6 +7,7 @@ package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Cliente;
 import br.edu.ifpb.praticas.sparta.interfaces.ClienteDAO;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 
 /**
@@ -20,7 +21,7 @@ public class ClienteService {
     
     public void add(int id, String nome, String email){ clientedao.cadastrarCliente(id,nome,email); }
     public void remove(String email){ clientedao.removerCliente(email); }
-    public Cliente buscar(String nome) { return clientedao.buscarCliente(nome); }
+    public List<Cliente> buscar(String nome) { return clientedao.buscarCliente(nome); }
     public boolean logar(){ return true; }
     
 }

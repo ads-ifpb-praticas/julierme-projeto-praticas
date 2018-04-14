@@ -17,7 +17,7 @@ public class AtendimentoService {
     
     private AtendimentoDAO atendidao;
     
-    public boolean agendar (int atentente, int cliente, String tipo, Date data, Time horario){
+    public boolean agendar (int atentente, int cliente, int tipo, Date data, Time horario){
         int ver = atendidao.agendar(atentente, cliente, tipo, data, horario);
         if(ver == 1){ return true; }
         else{ return false; }

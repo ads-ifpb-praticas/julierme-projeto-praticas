@@ -4,6 +4,7 @@ import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
 import br.edu.ifpb.praticas.sparta.entidades.Servico;
 import com.datastax.driver.core.Session;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -43,7 +44,7 @@ public class ServicoDAO implements br.edu.ifpb.praticas.sparta.interfaces.Servic
         }
     }
 
-    public Servico buscarServico(String tipo) {
+    public List<Servico> buscarServico(String tipo) {
     /*    conexao = (Conexao) new ServicoDAO();
         String cql = "SELECT * FROM servico WHERE tipo = " + tipo + ";";
         List<Row> rs = session.execute(cql).all();

@@ -5,6 +5,8 @@
  */
 package br.edu.ifpb.praticas.sparta.controladores;
 
+import br.edu.ifpb.praticas.sparta.entidades.Pesquisa;
+import br.edu.ifpb.praticas.sparta.services.PesquisaService;
 import java.io.Serializable;
 import javax.inject.Named;
 
@@ -14,5 +16,16 @@ import javax.inject.Named;
  */
 @Named
 public class ControladorPesquisa implements Serializable{
+    
+    private PesquisaService service;
+    private Pesquisa pesquisa;
+    
+    public void fazPesquisa(){
+        int id = pesquisa.getId();
+        int atend = pesquisa.getAtendimento();
+        boolean respondido = pesquisa.isRespondido();
+        float nota = pesquisa.getNota();
+        service.pesquisaRealizada(id, atend, respondido, nota);
+    }
     
 }

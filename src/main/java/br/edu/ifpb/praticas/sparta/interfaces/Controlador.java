@@ -11,6 +11,6 @@ package br.edu.ifpb.praticas.sparta.interfaces;
  */
 public interface Controlador {
     
-    public String fazerLogin();
+    public String fazLogin();
     
 }

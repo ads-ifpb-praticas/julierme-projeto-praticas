@@ -22,7 +22,7 @@ public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.At
         session = (Session) conexao.novaConexao();
     }
 
-    public int agendar(int atentente, int cliente, String tipo, Date data, Time horario) {
+    public int agendar(int atentente, int cliente, int tipo, Date data, Time horario) {
         try {
             conexao = (Conexao) new AtendimentoDAO();
             String cql = "INSERT INTO agendamento (matricula,id,tipo,data,horario)"

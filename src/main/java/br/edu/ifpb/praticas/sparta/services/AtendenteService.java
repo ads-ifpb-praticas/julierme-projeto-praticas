@@ -28,13 +28,15 @@ public class AtendenteService {
         } catch (SQLException ex) {
             Logger.getLogger(AtendenteService.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+    }
+    
     public void removerAtendente(int matricula){ try {
         atendao.removerAtendente(matricula);
         } catch (SQLException ex) {
             Logger.getLogger(AtendenteService.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+    }
+    
     public Atendente buscarAtendente(String nome){
         try {
             return atendao.buscarAtendente(nome);

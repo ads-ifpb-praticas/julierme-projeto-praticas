@@ -7,6 +7,7 @@ package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Servico;
 import br.edu.ifpb.praticas.sparta.interfaces.ServicoDAO;
+import java.util.List;
 
 /**
  *
@@ -19,10 +20,10 @@ public class Service {
     public void cadastrarServico(int codigo, int duracao, String categoria){
         servicodao.cadastrarServico(codigo, duracao, categoria);
     }
-    public void removerServico(int id){
-        servicodao.removerServico(id);
+    public void removerServico(int codigo){
+        servicodao.removerServico(codigo);
     }
-    public Servico buscarServico(String tipo){
+    public List<Servico> buscarServico(String tipo){
         /* servicodao.buscarServico(tipo); */
         return null;
     }

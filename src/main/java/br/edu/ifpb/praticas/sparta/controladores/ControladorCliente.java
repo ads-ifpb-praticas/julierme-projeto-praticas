@@ -9,6 +9,7 @@ import br.edu.ifpb.praticas.sparta.entidades.Cliente;
 import br.edu.ifpb.praticas.sparta.interfaces.Controlador;
 import br.edu.ifpb.praticas.sparta.services.ClienteService;
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,14 +26,24 @@ public class ControladorCliente implements Controlador,Serializable{
     private ClienteService service;
     private Cliente cliente;
     
-    public void cadastrarCliente(){
+    public void cadastroCliente(){
         int id = cliente.getId();
         String nome = cliente.getNome();
         String email = cliente.getEmail();
         service.add(id, nome, email);
     }
     
-    public String fazerLogin() {
+    public void excluiCliente(){
+        String email = cliente.getEmail();
+        service.remove(email);
+    }
+    
+    public void buscaCliente(){
+        String nome = cliente.getNome();
+        List<Cliente> clientes = service.buscar(nome);
+    }
+    
+    public String fazLogin() {
         boolean logado = service.logar();
         if (logado == true){ return "caos"; }
         return "index";
