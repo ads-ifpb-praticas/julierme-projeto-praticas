@@ -1,11 +1,10 @@
 package br.edu.ifpb.praticas.sparta.daos;
 
-import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
-import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
+import br.edu.ifpb.praticas.sparta.interfaces.Postgresql;
 import br.edu.ifpb.praticas.sparta.services.Gerador;
-import com.datastax.driver.core.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceContext;
@@ -14,60 +13,56 @@ import javax.persistence.PersistenceContext;
  *
  * @author Sinbad Heinstein
  */
-@Cassandra
+@Postgresql
 public class ClienteDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.ClienteDAO {
 
     @PersistenceContext()
-    private Conexao conexao;
+    private Postgres con;
     @PersistenceContext()
-    private Session session;
+    private Statement stat;
     private Gerador gera;
 
     public ClienteDAO() throws SQLException{
-        session = (Session) conexao.novaConexao();
+        stat = con.conexao().createStatement();
     }
 
-    public void cadastrarCliente(String nome, String email) {
+    public void cadastrarCliente(String nome, String email) throws NullPointerException{
         try {
-            conexao = (Conexao) new ClienteDAO();
             int id = gera.gerarID();
-            String cql = "INSERT INTO Cliente (id, nome, email) VALUES (" + id + "," + nome + "," + email + ");";
-            session.execute(cql);
-            conexao.fecharConexao();
+            String sql = "INSERT INTO Cliente (id, nome, email) VALUES (" + id + "," + nome + "," + email + ");";
+            stat.execute(sql);
+            con.fecharConexao();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void removerCliente(String email) {
+    public void removerCliente(String email) throws NullPointerException{
         try {
-            conexao = (Conexao) new ClienteDAO();
-            String cql = "DELETE FROM Cliente WHERE email = " + email + ";";
-            session.execute(cql);
-            conexao.fecharConexao();
+            String sql = "DELETE FROM Cliente WHERE email = " + email + ";";
+            stat.execute(sql);
+            con.fecharConexao();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public List<Row> buscarCliente(String nome) {
+    public ResultSet buscarCliente(String nome) throws NullPointerException{
         try {
-            conexao = (Conexao) new ClienteDAO();
-            String cql = "SELECT * FROM Cliente WHERE nome = " + nome + ";";
-            List<Row> clientes = session.execute(cql).all();
-            conexao.fecharConexao();
+            String sql = "SELECT * FROM Cliente WHERE nome = " + nome + ";";
+            ResultSet clientes = stat.executeQuery(sql);
+            con.fecharConexao();
             return clientes;
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         } return null;
     }
 
-    public List<Row> clientesCadastrados() {
+    public ResultSet clientesCadastrados() throws NullPointerException{
         try {
-            conexao = (Conexao) new ClienteDAO();
-            String cql = "SELECT * FROM Cliente;";
-            List<Row> clientes = session.execute(cql).all();
-            conexao.fecharConexao();
+            String sql = "SELECT * FROM Cliente;";
+            ResultSet clientes = stat.executeQuery(sql);
+            con.fecharConexao();
             return clientes;
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);

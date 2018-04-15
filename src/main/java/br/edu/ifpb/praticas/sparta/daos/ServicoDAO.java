@@ -1,12 +1,10 @@
 package br.edu.ifpb.praticas.sparta.daos;
 
-import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
-import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
+import br.edu.ifpb.praticas.sparta.interfaces.Postgresql;
 import br.edu.ifpb.praticas.sparta.services.Gerador;
-import com.datastax.driver.core.Row;
-import com.datastax.driver.core.Session;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceContext;
@@ -15,59 +13,57 @@ import javax.persistence.PersistenceContext;
  *
  * @author Sinbad Heinstein
  */
-@Cassandra
+@Postgresql
 public class ServicoDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.ServicoDAO {
 
     @PersistenceContext()
-    private Conexao conexao;
+    private Postgres con;
     @PersistenceContext()
-    private Session session;
+    private Statement stat;
     private Gerador gera;
     
     public ServicoDAO() throws SQLException{
-        session = (Session) conexao.novaConexao();
+        stat = con.conexao().createStatement();
     }
 
-    public void cadastrarServico(int atendente, int duracao, String categoria) {
+    public void cadastrarServico(int atendente, int duracao, String categoria) throws NullPointerException{
         try {
-            conexao = (Conexao) new ServicoDAO();
             long codigo = gera.gerarCod();
-            String cql = "INSERT INTO Servico (codigo,atendente,duracao,categoria)"
+            String sql = "INSERT INTO Servico (codigo,atendente,duracao,categoria)"
                     + " VALUES (" + codigo + "," + atendente + "," + duracao + "," + categoria + ");";
-            session.execute(cql);
-            conexao.fecharConexao();
+            stat.execute(sql);
+            con.fecharConexao();
         } catch (SQLException ex) {
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void removerServico(long codigo) {
+    public void removerServico(long codigo) throws NullPointerException{
         try {
-            conexao = (Conexao) new ServicoDAO();
-            String cql = "DELETE FROM Servico WHERE codigo = " + codigo + ";";
-            session.execute(cql);
-            conexao.fecharConexao();
+            String sql = "DELETE FROM Servico WHERE codigo = " + codigo + ";";
+            stat.execute(sql);
+            con.fecharConexao();
         } catch (SQLException ex) {
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public List<Row> buscarServico(String categoria) {
+    public ResultSet buscarServico(String categoria) throws NullPointerException{
         try {
-            conexao = (Conexao) new ServicoDAO();
-            String cql = "SELECT * FROM servico WHERE tipo = " + categoria + ";";
-            List<Row> servicos = session.execute(cql).all();
+            String sql = "SELECT * FROM servico WHERE tipo = " + categoria + ";";
+            ResultSet servicos = stat.executeQuery(sql);
+            con.fecharConexao();
             return servicos;
         } catch (SQLException ex) {
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } return null;
     }
 
-    public List<Row> servicosCadastrados() {
+    public ResultSet servicosCadastrados() throws NullPointerException{
         try {
-            conexao = (Conexao) new ServicoDAO();
-            String cql = "SELECT * FROM Servico;";
-            List<Row> servicos = session.execute(cql).all();
+            String sql = "SELECT * FROM Servico;";
+            ResultSet servicos = stat.executeQuery(sql);
+            con.fecharConexao();
             return servicos;
         } catch (SQLException ex) {
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);

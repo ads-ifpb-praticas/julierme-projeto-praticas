@@ -1,77 +1,71 @@
 package br.edu.ifpb.praticas.sparta.daos;
 
-import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
-import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
 import br.edu.ifpb.praticas.sparta.services.Gerador;
-import com.datastax.driver.core.Row;
-import com.datastax.driver.core.Session;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceContext;
+import br.edu.ifpb.praticas.sparta.interfaces.Postgresql;
 
 /**
  *
  * @author Sinbad Heinstein
  */
-@Cassandra
+@Postgresql
 public class AtendenteDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.AtendenteDAO{
 
     @PersistenceContext()
-    private Conexao conexao;
+    private Statement stat;
     @PersistenceContext()
-    private Session session;
+    private Postgres con;
     private Gerador gera;
     
     public AtendenteDAO() throws SQLException {
-        session = (Session) conexao.novaConexao();
+        stat = con.conexao().createStatement();
     }
 
-    public void cadastrarAtendente(String nome, Date atendimento, Time hora_chegada, Time hora_saida){
+    public void cadastrarAtendente(String nome, Date atendimento, Time hora_chegada, Time hora_saida) throws NullPointerException{
         try{
-            conexao = (Conexao) new AtendenteDAO();
             int matricula = gera.gerarMatricula();
-            String cql = "INSERT INTO Atendente (matricula,nome,atendimento,hora_chegada,hora_saida)"
+            String sql = "INSERT INTO Atendente (matricula,nome,atendimento,hora_chegada,hora_saida)"
                 + " VALUES (" + matricula + "," + nome + "," + atendimento + "," + hora_chegada + "," + hora_saida + ");";
-            session.execute(cql);
-            conexao.fecharConexao();
+            stat.execute(sql);
+            con.fecharConexao();
         } catch(SQLException ex){
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void removerAtendente(int matricula){
+    public void removerAtendente(int matricula) throws NullPointerException{
         try{
-            conexao = (Conexao) new AtendenteDAO();
-            String cql = "DELETE FROM Atendente WHERE matricula = " + matricula + ";";
-            session.execute(cql);
-            conexao.fecharConexao();
+            String sql = "DELETE FROM Atendente WHERE matricula = " + matricula + ";";
+            stat.execute(sql);
+            con.fecharConexao();
         } catch(SQLException ex){
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public List<Row> buscarAtendente(String nome){
+    public ResultSet buscarAtendente(String nome) throws NullPointerException{
         try{
-            conexao = (Conexao) new AtendenteDAO();
-            String cql = "SELECT * FROM Atendente WHERE nome = " + nome + ";";
-            List<Row> atendentes = session.execute(cql).all();
-            conexao.fecharConexao();
+            String sql = "SELECT * FROM Atendente WHERE nome = " + nome + ";";
+            ResultSet atendentes = stat.executeQuery(sql);
+            con.fecharConexao();
             return atendentes;
         } catch(SQLException ex){
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         } return null;
     }
     
-    public List<Row> atendentesCadastrados(){
+    public ResultSet atendentesCadastrados() throws NullPointerException{
         try{
-            conexao = (Conexao) new AtendenteDAO();
-            String cql = "SELECT * FROM Atendente;";
-            List<Row> atendentes = session.execute(cql).all();
-            conexao.fecharConexao();
+            String sql = "SELECT * FROM Atendente;";
+            ResultSet atendentes = stat.executeQuery(sql);
+            con.fecharConexao();
             return atendentes;
         } catch(SQLException ex){
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);

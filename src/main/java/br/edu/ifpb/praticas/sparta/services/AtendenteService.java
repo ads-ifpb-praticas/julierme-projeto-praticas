@@ -8,8 +8,8 @@ package br.edu.ifpb.praticas.sparta.services;
 import br.edu.ifpb.praticas.sparta.entidades.Atendente;
 import br.edu.ifpb.praticas.sparta.interfaces.daos.AtendenteDAO;
 import br.edu.ifpb.praticas.sparta.interfaces.services.AtendenteServece;
-import com.datastax.driver.core.Row;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -31,22 +31,30 @@ public class AtendenteService{
     public void removerAtendente(int matricula) throws SQLException{ atendao.removerAtendente(matricula); }
     
     public List<Atendente> listarAtendentes() throws SQLException{
-        List<Row> list = atendao.atendentesCadastrados();
+        ResultSet list = atendao.atendentesCadastrados();
         List<Atendente> atends = new ArrayList();
-        int total = list.size();
-        for(int i = 1; i <= total; i++){
-            Atendente a = (Atendente) list.get(i);
+        while(list.next()){
+            int matricula = list.getInt("matricula");
+            String nome = list.getString("nome");
+            Date atendimento = list.getDate("atendimento");
+            Time chegada = list.getTime("hora_chegada");
+            Time saida = list.getTime("hora_saida");
+            Atendente a = new Atendente(matricula,nome,atendimento,chegada,saida);
             atends.add(a);
         }
         return atends;
     }
     
     public List<Atendente> buscarAtendente(String nome) throws SQLException{
-        List<Row> list = atendao.buscarAtendente(nome);
+        ResultSet list = atendao.buscarAtendente(nome);
         List<Atendente> atends = new ArrayList();
-        int total = list.size();
-        for(int i = 1; i <= total; i++){
-            Atendente a = (Atendente) list.get(i);
+        while(list.next()){
+            int matricula = list.getInt("matricula");
+            String name = list.getString("nome");
+            Date atendimento = list.getDate("atendimento");
+            Time chegada = list.getTime("hora_chegada");
+            Time saida = list.getTime("hora_saida");
+            Atendente a = new Atendente(matricula,name,atendimento,chegada,saida);
             atends.add(a);
         }
         return atends;

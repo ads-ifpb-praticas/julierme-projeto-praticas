@@ -6,10 +6,11 @@
 package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Agenda;
+import br.edu.ifpb.praticas.sparta.entidades.Categoria;
 import br.edu.ifpb.praticas.sparta.interfaces.daos.AtendimentoDAO;
 import br.edu.ifpb.praticas.sparta.interfaces.services.AtendimentoServece;
-import com.datastax.driver.core.Row;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -37,11 +38,14 @@ public class AtendimentoService {
     }
     
     public List<Agenda> listar(int matricula)  throws SQLException{
-        List<Row> list = atendidao.listarAgendamentos(matricula);
+       ResultSet list = atendidao.listarAgendamentos(matricula);
         List<Agenda> atends = new ArrayList();
-        int total = list.size();
-        for(int i = 1; i <= total; i++){
-            Agenda a = (Agenda) list.get(i);
+        while(list.next()){
+            String nome = list.getString("cliente");
+            Categoria cat = list.getObject("tiposervico", Categoria.class);
+            Date data = list.getDate("data");
+            Time horario = list.getTime("horario");
+            Agenda a = new Agenda(nome,cat,data,horario);
             atends.add(a);
         }
         return atends;
