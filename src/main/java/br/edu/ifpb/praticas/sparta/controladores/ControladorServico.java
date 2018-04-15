@@ -11,7 +11,7 @@ import br.edu.ifpb.praticas.sparta.services.Service;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,7 +20,7 @@ import javax.inject.Named;
  * @author Sinbad Heinstein
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class ControladorServico implements Serializable{
 
     @Inject

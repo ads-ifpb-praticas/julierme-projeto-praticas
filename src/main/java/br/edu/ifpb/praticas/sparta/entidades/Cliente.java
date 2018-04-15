@@ -16,7 +16,7 @@ public class Cliente implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String nome;
     @Column(nullable = false, unique = true)
     private String email;

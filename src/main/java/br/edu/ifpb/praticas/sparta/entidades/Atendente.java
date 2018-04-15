@@ -20,16 +20,16 @@ public class Atendente implements Serializable {
     @Id
     @GeneratedValue
     private int matricula;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String nome;
     @Temporal(TemporalType.DATE)
-    @Column(length = 70, nullable = false, unique = true)
+    @Column(length = 70, nullable = false)
     private Date atendimento;
     @Temporal(TemporalType.TIME)
-    @Column(length = 70, nullable = false, unique = true)
+    @Column(length = 70, nullable = false)
     private Time hora_chegada;
     @Temporal(TemporalType.TIME)
-    @Column(length = 70, nullable = false, unique = true)
+    @Column(length = 70, nullable = false)
     private Time hora_saida;
 
     public Atendente(){ }

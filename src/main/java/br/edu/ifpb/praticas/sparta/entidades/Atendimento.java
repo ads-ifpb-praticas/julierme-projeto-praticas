@@ -20,24 +20,27 @@ public class Atendimento implements Serializable {
     @Id
     @GeneratedValue
     private int codigo;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int cliente;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
+    private int atendente;
+    @Column(nullable = false)
     private int tiposervico;
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Date data;
     @Temporal(TemporalType.TIME)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Time horario;
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean confirmado;
 
     public Atendimento(){ }
 
-    public Atendimento(int codigo, int cliente, int tiposervico, Date data, Time horario, boolean confirmado){
+    public Atendimento(int codigo, int cliente, int atendente, int tiposervico, Date data, Time horario, boolean confirmado){
         this.codigo = codigo;
         this.cliente = cliente;
+        this.atendente = atendente;
         this.tiposervico = tiposervico;
         this.data = data;
         this.horario = horario;
@@ -48,6 +51,8 @@ public class Atendimento implements Serializable {
     public void setCodigo(int codigo) {this.codigo = codigo;}
     public int getCliente() {return cliente;}
     public void setCliente(int cliente) {this.cliente = cliente;}
+    public int getAtendente() {return atendente;}
+    public void setAtendente(int atendente) {this.atendente = atendente;}   
     public int getTipoServico() { return tiposervico; }
     public void setTipoServico(int tiposervico) { this.tiposervico = tiposervico; }
     public Date getData() {return data;}

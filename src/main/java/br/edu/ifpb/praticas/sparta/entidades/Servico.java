@@ -16,9 +16,9 @@ public class Servico implements Serializable{
     @Id
     @GeneratedValue
     private int codigo;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int duracao;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Categoria categoria;
 
     public Servico(){ }
