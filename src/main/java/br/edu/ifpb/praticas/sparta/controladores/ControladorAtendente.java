@@ -10,7 +10,9 @@ import br.edu.ifpb.praticas.sparta.interfaces.Controlador;
 import br.edu.ifpb.praticas.sparta.services.AtendenteService;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -25,7 +27,7 @@ public class ControladorAtendente implements Controlador,Serializable{
     private AtendenteService service;
     private Atendente atende;
     
-    public void cadastroAtendente(){
+    public void cadastroAtendente() throws SQLException{
         int mat = atende.getMatricula();
         String nome = atende.getNome();
         Date data = atende.getAtendimento();
@@ -34,9 +36,14 @@ public class ControladorAtendente implements Controlador,Serializable{
         service.cadastrarAtendente(mat, nome, data, chegada, saida);
     }
     
-    public void excluiAtendente(){
+    public void excluiAtendente() throws SQLException{
         int mat = atende.getMatricula();
         service.removerAtendente(mat);
+    }
+    
+    public void listaAtendentes() throws SQLException{
+        String nome = atende.getNome();
+        List<Atendente> atendentes = service.buscarAtendente(nome);
     }
     
     public String fazLogin(){

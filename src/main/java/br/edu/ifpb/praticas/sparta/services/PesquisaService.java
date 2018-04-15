@@ -6,6 +6,7 @@
 package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.interfaces.PesquisaDAO;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,12 +16,10 @@ public class PesquisaService {
     
     private PesquisaDAO pesquisadao;
     
-    public boolean pesquisaRealizada(int id, int atendimento, boolean respondido, float nota){
-        
+    public boolean pesquisaRealizada(int id, int atendimento, boolean respondido, float nota)  throws SQLException{
         int ver = pesquisadao.realizarPesquisa(id, atendimento, respondido, nota);
         if(ver == 1){ return true; }
         return false;
-        
     }
     
 }

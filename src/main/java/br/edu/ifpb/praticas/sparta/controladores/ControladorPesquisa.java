@@ -8,6 +8,7 @@ package br.edu.ifpb.praticas.sparta.controladores;
 import br.edu.ifpb.praticas.sparta.entidades.Pesquisa;
 import br.edu.ifpb.praticas.sparta.services.PesquisaService;
 import java.io.Serializable;
+import java.sql.SQLException;
 import javax.inject.Named;
 
 /**
@@ -20,7 +21,7 @@ public class ControladorPesquisa implements Serializable{
     private PesquisaService service;
     private Pesquisa pesquisa;
     
-    public void fazPesquisa(){
+    public void fazPesquisa() throws SQLException{
         int id = pesquisa.getId();
         int atend = pesquisa.getAtendimento();
         boolean respondido = pesquisa.isRespondido();

@@ -9,6 +9,7 @@ import br.edu.ifpb.praticas.sparta.entidades.Atendimento;
 import br.edu.ifpb.praticas.sparta.services.AtendimentoService;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import javax.inject.Named;
 
@@ -22,7 +23,7 @@ public class ControladorAtendimento implements Serializable{
     private AtendimentoService service;
     private Atendimento atend;
     
-    public void agendamento(){
+    public void agendamento() throws SQLException{
         int cod = atend.getCodigo();
         int cliente = atend.getCliente();
         int tipo = atend.getTipoServico();
@@ -31,7 +32,7 @@ public class ControladorAtendimento implements Serializable{
         service.agendar(cliente, cliente, tipo, data, hora);
     }
     
-    public void cancelamento(){
+    public void cancelamento() throws SQLException{
         int cliente = atend.getCliente();
         Date data = atend.getData();
         Time hora = atend.getHorario();

@@ -5,10 +5,13 @@
  */
 package br.edu.ifpb.praticas.sparta.interfaces;
 
+import javax.inject.Named;
+
 /**
  *
  * @author Sinbad Heinstein
  */
+@Named
 public interface Controlador {
     
     public String fazLogin();

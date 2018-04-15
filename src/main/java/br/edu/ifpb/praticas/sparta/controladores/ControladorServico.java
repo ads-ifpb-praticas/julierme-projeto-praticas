@@ -8,6 +8,8 @@ package br.edu.ifpb.praticas.sparta.controladores;
 import br.edu.ifpb.praticas.sparta.entidades.Servico;
 import br.edu.ifpb.praticas.sparta.services.Service;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.List;
 import javax.inject.Named;
 
 /**
@@ -20,21 +22,21 @@ public class ControladorServico implements Serializable{
     private Servico servico;
     private Service serv;
     
-    public void cadastroServico(){
+    public void cadastroServico() throws SQLException{
         int cod = servico.getCodigo();
         int dur = servico.getDuracao();
         String cat = servico.getCategoria().toString();
         serv.cadastrarServico(cod, dur, cat);
     }
         
-    public void excluiServico(){
+    public void excluiServico() throws SQLException{
         int cod = servico.getCodigo();
         serv.removerServico(cod);
     }
     
-    public void buscaServico(){
+    public void buscaServico() throws SQLException{
         String tipo = servico.getCategoria().toString();
-        serv.buscarServico(tipo);
+        List<Servico> servicos = serv.buscarServico(tipo);
     }
     
 }

@@ -7,6 +7,7 @@ package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.interfaces.AtendimentoDAO;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 
 /**
@@ -17,13 +18,13 @@ public class AtendimentoService {
     
     private AtendimentoDAO atendidao;
     
-    public boolean agendar (int atentente, int cliente, int tipo, Date data, Time horario){
+    public boolean agendar (int atentente, int cliente, int tipo, Date data, Time horario)  throws SQLException{
         int ver = atendidao.agendar(atentente, cliente, tipo, data, horario);
         if(ver == 1){ return true; }
         else{ return false; }
     }
     
-    public boolean cancelar(int cliente, Date data, Time horario){
+    public boolean cancelar(int cliente, Date data, Time horario)  throws SQLException{
         int ver = atendidao.cancelar(cliente, data, horario);
         if(ver == 1){ return true; }
         else{ return false; }

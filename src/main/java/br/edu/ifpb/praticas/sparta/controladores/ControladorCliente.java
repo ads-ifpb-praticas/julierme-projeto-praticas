@@ -9,6 +9,7 @@ import br.edu.ifpb.praticas.sparta.entidades.Cliente;
 import br.edu.ifpb.praticas.sparta.interfaces.Controlador;
 import br.edu.ifpb.praticas.sparta.services.ClienteService;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -26,19 +27,19 @@ public class ControladorCliente implements Controlador,Serializable{
     private ClienteService service;
     private Cliente cliente;
     
-    public void cadastroCliente(){
+    public void cadastroCliente() throws SQLException{
         int id = cliente.getId();
         String nome = cliente.getNome();
         String email = cliente.getEmail();
         service.add(id, nome, email);
     }
     
-    public void excluiCliente(){
+    public void excluiCliente() throws SQLException{
         String email = cliente.getEmail();
         service.remove(email);
     }
     
-    public void buscaCliente(){
+    public void buscaCliente() throws SQLException{
         String nome = cliente.getNome();
         List<Cliente> clientes = service.buscar(nome);
     }

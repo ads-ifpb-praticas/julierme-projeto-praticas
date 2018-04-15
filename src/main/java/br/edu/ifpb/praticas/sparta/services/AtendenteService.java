@@ -7,12 +7,13 @@ package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Atendente;
 import br.edu.ifpb.praticas.sparta.interfaces.AtendenteDAO;
+import com.datastax.driver.core.Row;
 import javax.enterprise.context.RequestScoped;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -23,27 +24,21 @@ public class AtendenteService {
     
     private AtendenteDAO atendao;
     
-    public void cadastrarAtendente(int matricula, String nome, Date atendimento, Time hora_chegada, Time hora_saida){ try {
+    public void cadastrarAtendente(int matricula, String nome, Date atendimento, Time hora_chegada, Time hora_saida) throws SQLException{
         atendao.cadastrarAtendente(matricula, nome, atendimento, hora_chegada, hora_saida);
-        } catch (SQLException ex) {
-            Logger.getLogger(AtendenteService.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
-    public void removerAtendente(int matricula){ try {
-        atendao.removerAtendente(matricula);
-        } catch (SQLException ex) {
-            Logger.getLogger(AtendenteService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    public void removerAtendente(int matricula) throws SQLException{ atendao.removerAtendente(matricula); }
     
-    public Atendente buscarAtendente(String nome){
-        try {
-            return atendao.buscarAtendente(nome);
-        } catch (SQLException ex) {
-            Logger.getLogger(AtendenteService.class.getName()).log(Level.SEVERE, null, ex);
+    public List<Atendente> buscarAtendente(String nome) throws SQLException{
+        List<Row> list = atendao.buscarAtendente(nome);
+        List<Atendente> atends = new ArrayList();
+        int total = list.size();
+        for(int i = 1; i <= total; i++){
+            Atendente a = (Atendente) list.get(i);
+            atends.add(a);
         }
-        return null;
+        return atends;
     }
     
     public boolean logar(){
