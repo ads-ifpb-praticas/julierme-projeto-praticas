@@ -17,7 +17,7 @@ public class Cassandra implements Conexao {
     @Produces
     public Session novaConexao() throws SQLException {
         cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-        return cluster.connect("spartan");
+        return cluster.connect("sparta");
     }
 
     @Produces
