@@ -5,10 +5,11 @@
  */
 package br.edu.ifpb.praticas.sparta.daos;
 
-import br.edu.ifpb.praticas.sparta.interfaces.Postgresql;
+import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
+import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
 import br.edu.ifpb.praticas.sparta.services.Gerador;
+import com.datastax.driver.core.Session;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceContext;
@@ -17,25 +18,26 @@ import javax.persistence.PersistenceContext;
  *
  * @author Sinbad Heinstein
  */
-@Postgresql
+@Cassandra
 public class PesquisaDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.PesquisaDAO{
     
     @PersistenceContext()
-    private Postgres con;
+    private Conexao conexao;
     @PersistenceContext()
-    private Statement stat;
+    private Session session;
     private Gerador gera;
 
     public PesquisaDAO() throws SQLException{
-        stat = con.conexao().createStatement();
+        session = (Session) conexao.novaConexao();
     }
 
-    public int realizarPesquisa(long atendimento, boolean respondido, float nota) throws NullPointerException{
+    public int realizarPesquisa(long atendimento, boolean respondido, float nota) {
         try {
+            conexao = (Conexao) new PesquisaDAO();
             long id = gera.gerarCod();
-            String sql = "INSERT INTO Pesquisa (id,atendimento,respondido,nota) VALUES (" + id + "," + atendimento + "," + respondido + "," + nota + ");";
-            stat.execute(sql);
-            con.fecharConexao();
+            String cql = "INSERT INTO Pesquisa (id,atendimento,respondido,nota) VALUES (" + id + "," + atendimento + "," + respondido + "," + nota + ");";
+            session.execute(cql);
+            conexao.fecharConexao();
             return 1;
         } catch (SQLException ex) {
             Logger.getLogger(PesquisaDAO.class.getName()).log(Level.SEVERE, null, ex);

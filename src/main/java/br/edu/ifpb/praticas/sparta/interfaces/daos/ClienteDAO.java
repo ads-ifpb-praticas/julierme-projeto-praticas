@@ -1,12 +1,13 @@
 package br.edu.ifpb.praticas.sparta.interfaces.daos;
 
-import java.sql.ResultSet;
+import com.datastax.driver.core.Row;
+import java.util.List;
 
 public interface ClienteDAO {
 
     public void cadastrarCliente(String nome, String email);
     public void removerCliente(String email);
-    public ResultSet buscarCliente(String nome);
-    public ResultSet clientesCadastrados();
+    public List<Row> buscarCliente(String nome);
+    public List<Row> clientesCadastrados();
 
 }
