@@ -29,11 +29,10 @@ public class ControladorPesquisa implements Serializable{
     private Pesquisa pesquisa;
     
     public void fazPesquisa() throws SQLException{
-        int id = pesquisa.getId();
-        int atend = pesquisa.getAtendimento();
+        long atend = pesquisa.getAtendimento();
         boolean respondido = pesquisa.isRespondido();
         float nota = pesquisa.getNota();
-        service.pesquisaRealizada(id, atend, respondido, nota);
+        service.pesquisaRealizada(atend, respondido, nota);
     }
     
 }

@@ -2,6 +2,7 @@ package br.edu.ifpb.praticas.sparta.daos;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
 import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
+import br.edu.ifpb.praticas.sparta.services.Gerador;
 import com.datastax.driver.core.*;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,15 +21,17 @@ public class ClienteDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.C
     private Conexao conexao;
     @PersistenceContext()
     private Session session;
+    private Gerador gera;
 
     public ClienteDAO() throws SQLException{
         session = (Session) conexao.novaConexao();
     }
 
-    public void cadastrarCliente(int id, String nome, String email) {
+    public void cadastrarCliente(String nome, String email) {
         try {
             conexao = (Conexao) new ClienteDAO();
-            String cql = "INSERT INTO cliente (id, nome, email) VALUES (" + id + "," + nome + "," + email + ");";
+            int id = gera.gerarID();
+            String cql = "INSERT INTO Cliente (id, nome, email) VALUES (" + id + "," + nome + "," + email + ");";
             session.execute(cql);
             conexao.fecharConexao();
         } catch (SQLException ex) {
@@ -39,7 +42,7 @@ public class ClienteDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.C
     public void removerCliente(String email) {
         try {
             conexao = (Conexao) new ClienteDAO();
-            String cql = "DELETE FROM cliente WHERE email = " + email + ";";
+            String cql = "DELETE FROM Cliente WHERE email = " + email + ";";
             session.execute(cql);
             conexao.fecharConexao();
         } catch (SQLException ex) {
@@ -50,7 +53,7 @@ public class ClienteDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.C
     public List<Row> buscarCliente(String nome) {
         try {
             conexao = (Conexao) new ClienteDAO();
-            String cql = "SELECT * FROM cliente WHERE nome = " + nome + ";";
+            String cql = "SELECT * FROM Cliente WHERE nome = " + nome + ";";
             List<Row> clientes = session.execute(cql).all();
             conexao.fecharConexao();
             return clientes;

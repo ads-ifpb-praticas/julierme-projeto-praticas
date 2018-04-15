@@ -30,15 +30,15 @@ public class ControladorServico implements Serializable{
     private Service serv;
     
     public String cadastroServico() throws SQLException{
-        int cod = servico.getCodigo();
+        int atendente = servico.getAtendente();
         int dur = servico.getDuracao();
         String cat = servico.getCategoria().toString();
-        serv.cadastrarServico(cod, dur, cat);
+        serv.cadastrarServico(atendente, dur, cat);
         return "index?faces-redirect=true";
     }
         
     public String excluiServico() throws SQLException{
-        int cod = servico.getCodigo();
+        long cod = servico.getCodigo();
         serv.removerServico(cod);
         return "index?faces-redirect=true";
     }

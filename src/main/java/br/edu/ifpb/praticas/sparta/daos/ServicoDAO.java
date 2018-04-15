@@ -2,6 +2,7 @@ package br.edu.ifpb.praticas.sparta.daos;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
 import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
+import br.edu.ifpb.praticas.sparta.services.Gerador;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import java.sql.SQLException;
@@ -21,16 +22,18 @@ public class ServicoDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.S
     private Conexao conexao;
     @PersistenceContext()
     private Session session;
+    private Gerador gera;
     
     public ServicoDAO() throws SQLException{
         session = (Session) conexao.novaConexao();
     }
 
-    public void cadastrarServico(int codigo, int duracao, String categoria) {
+    public void cadastrarServico(int atendente, int duracao, String categoria) {
         try {
             conexao = (Conexao) new ServicoDAO();
-            String cql = "INSERT INTO atendente (codigo,duracao,categoria)"
-                    + " VALUES (" + codigo + "," + duracao + "," + categoria + ");";
+            long codigo = gera.gerarCod();
+            String cql = "INSERT INTO Servico (codigo,atendente,duracao,categoria)"
+                    + " VALUES (" + codigo + "," + atendente + "," + duracao + "," + categoria + ");";
             session.execute(cql);
             conexao.fecharConexao();
         } catch (SQLException ex) {
@@ -38,10 +41,10 @@ public class ServicoDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.S
         }
     }
 
-    public void removerServico(int id) {
+    public void removerServico(long codigo) {
         try {
             conexao = (Conexao) new ServicoDAO();
-            String cql = "DELETE FROM servico WHERE id = " + id + ";";
+            String cql = "DELETE FROM Servico WHERE codigo = " + codigo + ";";
             session.execute(cql);
             conexao.fecharConexao();
         } catch (SQLException ex) {
@@ -63,7 +66,7 @@ public class ServicoDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.S
     public List<Row> servicosCadastrados() {
         try {
             conexao = (Conexao) new ServicoDAO();
-            String cql = "SELECT * FROM servico;";
+            String cql = "SELECT * FROM Servico;";
             List<Row> servicos = session.execute(cql).all();
             return servicos;
         } catch (SQLException ex) {
