@@ -33,6 +33,13 @@ public class Atendente implements Serializable {
     private Time hora_saida;
 
     public Atendente(){ }
+    
+    public Atendente(String nome, Date atendimento, Time hora_chegada, Time hora_saida){
+        this.nome = nome;
+        this.atendimento = atendimento;
+        this.hora_chegada = hora_chegada;
+        this.hora_saida = hora_saida;
+    }
 
     public Atendente(int matricula, String nome, Date atendimento, Time hora_chegada, Time hora_saida){
         this.matricula = matricula;

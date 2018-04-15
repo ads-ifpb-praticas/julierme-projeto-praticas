@@ -2,6 +2,7 @@ package br.edu.ifpb.praticas.sparta.daos;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
 import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
+import br.edu.ifpb.praticas.sparta.services.Gerador;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import java.sql.Date;
@@ -23,6 +24,7 @@ public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.da
     private Conexao conexao;
     @PersistenceContext()
     private Session session;
+    private Gerador gera;
 
     public AtendimentoDAO() throws SQLException{
         session = (Session) conexao.novaConexao();
@@ -31,8 +33,9 @@ public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.da
     public int agendar(int atentente, int cliente, int tipo, Date data, Time horario) {
         try {
             conexao = (Conexao) new AtendimentoDAO();
-            String cql = "INSERT INTO agendamento (matricula,id,tipo,data,horario)"
-                    + " VALUES (" + atentente + "," + cliente + "," + tipo + "," + data + "," + horario + ",true);";
+            long codigo = gera.gerarCod();
+            String cql = "INSERT INTO Atendimento (id, matricula,id,tipo,data,horario)"
+                    + " VALUES (" + codigo + atentente + "," + cliente + "," + tipo + "," + data + "," + horario + ",true);";
             session.execute(cql);
             conexao.fecharConexao();
             return 1;
@@ -45,6 +48,18 @@ public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.da
         try {
             conexao = (Conexao) new AtendimentoDAO();
             String cql = "Update Atendimento SET confirmado = false WHRE cliente = " + cliente + " AND data = " + data + " AND horario = " + horario +";";
+            session.execute(cql);
+            conexao.fecharConexao();
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(AtendimentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } return 0;
+    }
+    
+    public int confirmar(int cliente, Date data, Time horario){
+        try {
+            conexao = (Conexao) new AtendimentoDAO();
+            String cql = "Update Atendimento SET confirmado = true WHRE cliente = " + cliente + " AND data = " + data + " AND horario = " + horario +";";
             session.execute(cql);
             conexao.fecharConexao();
             return 1;

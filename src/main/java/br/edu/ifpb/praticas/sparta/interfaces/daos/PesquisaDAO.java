@@ -11,6 +11,6 @@ package br.edu.ifpb.praticas.sparta.interfaces.daos;
  */
 public interface PesquisaDAO {
     
-    public int realizarPesquisa(int id, int atendimento, boolean respondido, float nota);
+    public int realizarPesquisa(long atendimento, boolean respondido, float nota);
         
 }

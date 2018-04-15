@@ -5,18 +5,33 @@
  */
 package br.edu.ifpb.praticas.sparta.entidades;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Sinbad Heinstein
  */
-public class Agenda {
+@Entity
+public class Agenda implements Serializable {
     
+    @Id
+    private int id;
+    @Column(nullable = false)
     private String cliente;
+    @Column(nullable = false)
     private Categoria tipo;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date data;
+    @Temporal(TemporalType.TIME)
+    @Column(nullable = false)
     private Time horario;
     
     public Agenda(){ }
@@ -28,6 +43,14 @@ public class Agenda {
         this.horario = horario;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getCliente() {
         return cliente;
     }

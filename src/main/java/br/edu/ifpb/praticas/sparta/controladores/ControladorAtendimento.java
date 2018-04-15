@@ -33,7 +33,7 @@ public class ControladorAtendimento implements Serializable{
     private Atendimento atend;
     
     public void agendamento() throws SQLException{
-        int cod = atend.getCodigo();
+        long cod = atend.getCodigo();
         int cliente = atend.getCliente();
         int tipo = atend.getTipoServico();
         Date data = atend.getData();
