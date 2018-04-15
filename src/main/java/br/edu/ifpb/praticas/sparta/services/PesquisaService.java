@@ -5,22 +5,23 @@
  */
 package br.edu.ifpb.praticas.sparta.services;
 
-import br.edu.ifpb.praticas.sparta.interfaces.PesquisaDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.daos.PesquisaDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.services.PesquisaServece;
+import java.sql.SQLException;
 
 /**
  *
  * @author Sinbad Heinstein
  */
+@PesquisaServece
 public class PesquisaService {
     
     private PesquisaDAO pesquisadao;
     
-    public boolean pesquisaRealizada(int id, int atendimento, boolean respondido, float nota){
-        
-        int ver = pesquisadao.realizarPesquisa(id, atendimento, respondido, nota);
+    public boolean pesquisaRealizada(long atendimento, boolean respondido, float nota)  throws SQLException{
+        int ver = pesquisadao.realizarPesquisa(atendimento, respondido, nota);
         if(ver == 1){ return true; }
         return false;
-        
     }
     
 }

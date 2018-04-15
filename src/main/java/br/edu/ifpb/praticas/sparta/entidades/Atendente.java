@@ -1,17 +1,45 @@
 package br.edu.ifpb.praticas.sparta.entidades;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Atendente {
+/**
+ *
+ * @author Sinbad Heinstein
+ */
+@Entity
+public class Atendente implements Serializable {
 
+    @Id
+    @GeneratedValue
     private int matricula;
+    @Column(nullable = false)
     private String nome;
+    @Temporal(TemporalType.DATE)
+    @Column(length = 70, nullable = false)
     private Date atendimento;
+    @Temporal(TemporalType.TIME)
+    @Column(length = 70, nullable = false)
     private Time hora_chegada;
+    @Temporal(TemporalType.TIME)
+    @Column(length = 70, nullable = false)
     private Time hora_saida;
 
     public Atendente(){ }
+    
+    public Atendente(String nome, Date atendimento, Time hora_chegada, Time hora_saida){
+        this.nome = nome;
+        this.atendimento = atendimento;
+        this.hora_chegada = hora_chegada;
+        this.hora_saida = hora_saida;
+    }
 
     public Atendente(int matricula, String nome, Date atendimento, Time hora_chegada, Time hora_saida){
         this.matricula = matricula;

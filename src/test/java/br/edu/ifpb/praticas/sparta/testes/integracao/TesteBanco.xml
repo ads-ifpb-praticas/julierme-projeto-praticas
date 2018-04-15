@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <Cliente cliente="Diogo Moreira" email='diogodmoreira@me.com'/>
+    <Cliente cliente="John Lennon" email='johnlennon@me.com'/>
+    <Cliente cliente="Julierme Jadon" email='juliermeh@me.com'/>
+</dataset>

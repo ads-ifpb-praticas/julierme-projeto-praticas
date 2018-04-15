@@ -6,21 +6,44 @@
 package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Cliente;
-import br.edu.ifpb.praticas.sparta.interfaces.ClienteDAO;
-import javax.enterprise.context.RequestScoped;
+import br.edu.ifpb.praticas.sparta.interfaces.daos.ClienteDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.services.ClienteServece;
+import com.datastax.driver.core.Row;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Sinbad Heinstein
  */
-@RequestScoped
+@ClienteServece
 public class ClienteService {
     
     private ClienteDAO clientedao;
     
-    public void add(int id, String nome, String email){ clientedao.cadastrarCliente(id,nome,email); }
-    public void remove(String email){ clientedao.removerCliente(email); }
-    public Cliente buscar(String nome) { return clientedao.buscarCliente(nome); }
+    public void add(String nome, String email) throws SQLException{ clientedao.cadastrarCliente(nome,email); }
+    public void remove(String email)  throws SQLException{ clientedao.removerCliente(email); }
+    public List<Cliente> listar()  throws SQLException{
+        List<Row> list = clientedao.clientesCadastrados();
+        List<Cliente> clientes = new ArrayList();
+        int total = list.size();
+        for(int i = 1; i <= total; i++){
+            Cliente c = (Cliente) list.get(i);
+            clientes.add(c);
+        }
+        return clientes;
+    }
+    public List<Cliente> buscar(String nome)  throws SQLException{
+        List<Row> list = clientedao.buscarCliente(nome);
+        List<Cliente> clientes = new ArrayList();
+        int total = list.size();
+        for(int i = 1; i <= total; i++){
+            Cliente c = (Cliente) list.get(i);
+            clientes.add(c);
+        }
+        return clientes;
+    }
     public boolean logar(){ return true; }
     
 }

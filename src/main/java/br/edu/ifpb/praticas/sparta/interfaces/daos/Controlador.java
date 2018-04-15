@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifpb.praticas.sparta.interfaces;
+package br.edu.ifpb.praticas.sparta.interfaces.daos;
+
+import javax.inject.Named;
 
 /**
  *
  * @author Sinbad Heinstein
  */
+@Named
 public interface Controlador {
     
-    public String fazerLogin();
+    public String fazLogin();
     
 }

@@ -1,28 +1,86 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.edu.ifpb.praticas.sparta.entidades;
 
-import java.util.List;
-import javax.persistence.GeneratedValue;
+import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Time;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Agenda {
-
+/**
+ *
+ * @author Sinbad Heinstein
+ */
+@Entity
+public class Agenda implements Serializable {
+    
     @Id
-    @GeneratedValue
-    private int atendente ;
-    @ManyToOne
-    private List<Atendimento> atendimentos;
-
+    private int id;
+    @Column(nullable = false)
+    private String cliente;
+    @Column(nullable = false)
+    private Categoria tipo;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    private Date data;
+    @Temporal(TemporalType.TIME)
+    @Column(nullable = false)
+    private Time horario;
+    
     public Agenda(){ }
-
-    public Agenda(int atendente, List<Atendimento> atendimentos){
-        this.atendente = atendente;
-        this.atendimentos = atendimentos;
+    
+    public Agenda(String cliente, Categoria tipo, Date data, Time horario){
+        this.cliente = cliente;
+        this.tipo = tipo;
+        this.data = data;
+        this.horario = horario;
     }
 
-    public int getAtendente() {return atendente;}
-    public void setAtendente(int atendente) {this.atendente = atendente;}
-    public List<Atendimento> getAtendimentos() {return atendimentos;}
-    public void setAtendimentos(List<Atendimento> atendimentos) {this.atendimentos = atendimentos;}
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public Categoria getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Categoria tipo) {
+        this.tipo = tipo;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Time getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Time horario) {
+        this.horario = horario;
+    }
+    
 }
