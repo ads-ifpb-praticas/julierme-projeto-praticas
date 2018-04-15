@@ -1,16 +1,24 @@
 package br.edu.ifpb.praticas.sparta.entidades;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ *
+ * @author Sinbad Heinstein
+ */
 @Entity
-public class Cliente {
+public class Cliente implements Serializable{
     
     @Id
     @GeneratedValue
     private int id;
+    @Column(nullable = false, unique = true)
     private String nome;
+    @Column(nullable = false, unique = true)
     private String email;
 
     public Cliente(){ }

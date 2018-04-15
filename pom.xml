@@ -8,6 +8,14 @@
     <artifactId>julierme-projectsparta</artifactId>
     <version>1.0-SNAPSHOT</version>
     
+    <developers>
+        <developer>
+            <name>Julierme Jadon Oliveira Mangueira</name>
+            <email>julierme.heinstein@gmail.com</email>
+            <organization>ads-ifpb-praticas</organization>
+        </developer>
+    </developers>
+    
     <dependencies>
         <!--- Banco de Dados -->
         <dependency>

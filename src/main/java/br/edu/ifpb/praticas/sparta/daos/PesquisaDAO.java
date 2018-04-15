@@ -6,22 +6,23 @@
 package br.edu.ifpb.praticas.sparta.daos;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
+import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
 import com.datastax.driver.core.Session;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author Sinbad Heinstein
  */
-@RequestScoped
-public class PesquisaDAO implements br.edu.ifpb.praticas.sparta.interfaces.PesquisaDAO{
+@Cassandra
+public class PesquisaDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.PesquisaDAO{
     
     @PersistenceContext()
     private Conexao conexao;
+    @PersistenceContext()
     private Session session;
 
     public PesquisaDAO() throws SQLException{

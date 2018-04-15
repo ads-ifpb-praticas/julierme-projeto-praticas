@@ -6,10 +6,13 @@
 package br.edu.ifpb.praticas.sparta.controladores;
 
 import br.edu.ifpb.praticas.sparta.entidades.Servico;
+import br.edu.ifpb.praticas.sparta.interfaces.services.Servece;
 import br.edu.ifpb.praticas.sparta.services.Service;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -17,26 +20,38 @@ import javax.inject.Named;
  * @author Sinbad Heinstein
  */
 @Named
+@SessionScoped
 public class ControladorServico implements Serializable{
-    
+
+    @Inject
+    @Servece
     private Servico servico;
+    @Inject
     private Service serv;
     
-    public void cadastroServico() throws SQLException{
+    public String cadastroServico() throws SQLException{
         int cod = servico.getCodigo();
         int dur = servico.getDuracao();
         String cat = servico.getCategoria().toString();
         serv.cadastrarServico(cod, dur, cat);
+        return "index?faces-redirect=true";
     }
         
-    public void excluiServico() throws SQLException{
+    public String excluiServico() throws SQLException{
         int cod = servico.getCodigo();
         serv.removerServico(cod);
+        return "index?faces-redirect=true";
     }
     
     public void buscaServico() throws SQLException{
         String tipo = servico.getCategoria().toString();
         List<Servico> servicos = serv.buscarServico(tipo);
     }
+    
+    public void listaServicos() throws SQLException{ List<Servico> servicos = serv.listarServicos(); }
+    
+    public Servico getServico(){ return servico; }
+    
+    public void setServico(Servico s){ this.servico = s; }
     
 }

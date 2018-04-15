@@ -1,21 +1,36 @@
 package br.edu.ifpb.praticas.sparta.entidades;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author Sinbad Heinstein
+ */
 @Entity
-public class Atendimento {
+public class Atendimento implements Serializable {
 
     @Id
     @GeneratedValue
     private int codigo;
+    @Column(nullable = false, unique = true)
     private int cliente;
+    @Column(nullable = false, unique = true)
     private int tiposervico;
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false, unique = true)
     private Date data;
+    @Temporal(TemporalType.TIME)
+    @Column(nullable = false, unique = true)
     private Time horario;
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean confirmado;
 
     public Atendimento(){ }

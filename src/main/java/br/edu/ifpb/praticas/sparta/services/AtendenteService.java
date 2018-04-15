@@ -6,9 +6,9 @@
 package br.edu.ifpb.praticas.sparta.services;
 
 import br.edu.ifpb.praticas.sparta.entidades.Atendente;
-import br.edu.ifpb.praticas.sparta.interfaces.AtendenteDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.daos.AtendenteDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.services.AtendenteServece;
 import com.datastax.driver.core.Row;
-import javax.enterprise.context.RequestScoped;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -19,8 +19,8 @@ import java.util.List;
  *
  * @author Sinbad Heinstein
  */
-@RequestScoped
-public class AtendenteService {
+@AtendenteServece
+public class AtendenteService{
     
     private AtendenteDAO atendao;
     
@@ -29,6 +29,17 @@ public class AtendenteService {
     }
     
     public void removerAtendente(int matricula) throws SQLException{ atendao.removerAtendente(matricula); }
+    
+    public List<Atendente> listarAtendentes() throws SQLException{
+        List<Row> list = atendao.atendentesCadastrados();
+        List<Atendente> atends = new ArrayList();
+        int total = list.size();
+        for(int i = 1; i <= total; i++){
+            Atendente a = (Atendente) list.get(i);
+            atends.add(a);
+        }
+        return atends;
+    }
     
     public List<Atendente> buscarAtendente(String nome) throws SQLException{
         List<Row> list = atendao.buscarAtendente(nome);

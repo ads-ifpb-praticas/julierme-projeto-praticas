@@ -5,7 +5,8 @@
  */
 package br.edu.ifpb.praticas.sparta.services;
 
-import br.edu.ifpb.praticas.sparta.interfaces.AtendimentoDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.daos.AtendimentoDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.services.AtendimentoServece;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -14,6 +15,7 @@ import java.sql.Time;
  *
  * @author Sinbad Heinstein
  */
+@AtendimentoServece
 public class AtendimentoService {
     
     private AtendimentoDAO atendidao;

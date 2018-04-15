@@ -5,13 +5,15 @@
  */
 package br.edu.ifpb.praticas.sparta.services;
 
-import br.edu.ifpb.praticas.sparta.interfaces.PesquisaDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.daos.PesquisaDAO;
+import br.edu.ifpb.praticas.sparta.interfaces.services.PesquisaServece;
 import java.sql.SQLException;
 
 /**
  *
  * @author Sinbad Heinstein
  */
+@PesquisaServece
 public class PesquisaService {
     
     private PesquisaDAO pesquisadao;

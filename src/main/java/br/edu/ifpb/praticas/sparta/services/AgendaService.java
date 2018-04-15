@@ -5,10 +5,13 @@
  */
 package br.edu.ifpb.praticas.sparta.services;
 
+import br.edu.ifpb.praticas.sparta.interfaces.services.AgendaServece;
+
 /**
  *
  * @author Sinbad Heinstein
  */
+@AgendaServece
 public class AgendaService {
     
 }

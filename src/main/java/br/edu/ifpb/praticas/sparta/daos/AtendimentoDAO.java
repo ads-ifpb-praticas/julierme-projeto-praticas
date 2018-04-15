@@ -1,21 +1,25 @@
 package br.edu.ifpb.praticas.sparta.daos;
 
 import br.edu.ifpb.praticas.sparta.interfaces.Conexao;
+import br.edu.ifpb.praticas.sparta.interfaces.Cassandra;
 import com.datastax.driver.core.Session;
-
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.PersistenceContext;
 
-@RequestScoped
-public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.AtendimentoDAO {
+/**
+ *
+ * @author Sinbad Heinstein
+ */
+@Cassandra
+public class AtendimentoDAO implements br.edu.ifpb.praticas.sparta.interfaces.daos.AtendimentoDAO {
 
     @PersistenceContext()
     private Conexao conexao;
+    @PersistenceContext()
     private Session session;
 
     public AtendimentoDAO() throws SQLException{

@@ -1,4 +1,4 @@
-package br.edu.ifpb.praticas.sparta.interfaces;
+package br.edu.ifpb.praticas.sparta.interfaces.daos;
 
 import java.sql.Date;
 import java.sql.Time;
