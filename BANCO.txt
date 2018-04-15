@@ -1,41 +1,44 @@
 ﻿// Banco de Dados: Cassandra versão 3.11.1 //
 // Necessita do Python 2.7 instalado no dispositivo //
 
+CREATE KEYSPACE sparta WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
+
 CREATE TABLE Atendente(
-	int matricula PRIMARY KEY,
-	text nome NOT NULL,
-	Date atendimento NOT NULL,
-	Time hora_chegada NOT NULL,
-	Time hora_saida NOT NULL
+	matricula int PRIMARY KEY,
+	nome text,
+	atendimento date,
+	hora_chegada time,
+	hora_saida time
 ) WITH comment='Registro de atendentes';
 
 CREATE TABLE Cliente(
-	int id PRIMARY KEY,
-	text nome NOT NULL,
-	text email NOT NULL
+	id int PRIMARY KEY,
+	nome text,
+	email text
 ) WITH comment='Registro de clientes';
 
 CREATE TABLE Servico(
-	bigint codigo PRIMARY KEY,
-	int atendente PRIMARY KEY,
-	int duracao NOT NULL,
-	text categoria NOT NULL
+	codigo bigint,
+	atendente int,
+	duracao int,
+	categoria text,
+	PRIMARY KEY (codigo, atendente)
 ) WITH comment='Registro dos servicos';
 
 CREATE TABLE Atendimento(
-	bigint codigo,
-	int cliente,
-	bigint tiposervico NOT NULL,
-	Date data NOT NULL,
-	Time horario NOT NULL,
-	boolean confirmado,
+	codigo bigint,
+	cliente int,
+	tiposervico bigint,
+	data date,
+	horario time,
+	confirmado boolean,
 	PRIMARY KEY (codigo, cliente)
 ) WITH comment='Registro de atendimentos';
 
 CREATE TABLE Pesquisa(
-	bigint id,
-	bigint atendimento,
-	boolean respondido NOT NULL,
-	float nota,
+	id bigint,
+	atendimento bigint,
+	respondido boolean,
+	nota float,
 	PRIMARY KEY (id, atendimento)
 ) WITH comment='Registro de pesquisas realizadas';
