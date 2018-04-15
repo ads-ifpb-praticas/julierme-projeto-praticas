@@ -31,9 +31,10 @@ public class ControladorCliente implements Controlador,Serializable{
     private Cliente cliente;
     
     public String cadastroCliente() throws SQLException{
+        int id = cliente.getId();
         String nome = cliente.getNome();
         String email = cliente.getEmail();
-        service.add(nome, email);
+        service.add(id, nome, email);
         return "index?faces-redirect=true";
     }
     

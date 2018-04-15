@@ -22,7 +22,7 @@ public class ClienteService {
     
     private ClienteDAO clientedao;
     
-    public void add(String nome, String email) throws SQLException{ clientedao.cadastrarCliente(nome,email); }
+    public void add(int id, String nome, String email) throws SQLException{ clientedao.cadastrarCliente(id,nome,email); }
     public void remove(String email)  throws SQLException{ clientedao.removerCliente(email); }
     public List<Cliente> listar()  throws SQLException{
         List<Row> list = clientedao.clientesCadastrados();

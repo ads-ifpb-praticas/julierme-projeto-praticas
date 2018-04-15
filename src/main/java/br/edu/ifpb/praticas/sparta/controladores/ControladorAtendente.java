@@ -33,11 +33,12 @@ public class ControladorAtendente implements Controlador,Serializable{
     private Atendente atende;
     
     public String cadastroAtendente() throws SQLException{
+        int mat = atende.getMatricula();
         String nome = atende.getNome();
         Date data = atende.getAtendimento();
         Time chegada = atende.getHora_chegada();
         Time saida = atende.getHora_saida();
-        service.cadastrarAtendente(nome, data, chegada, saida);
+        service.cadastrarAtendente(mat, nome, data, chegada, saida);
         return "index?faces-redirect=true";
     }
     

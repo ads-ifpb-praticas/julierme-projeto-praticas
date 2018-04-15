@@ -18,8 +18,8 @@ public class PesquisaService {
     
     private PesquisaDAO pesquisadao;
     
-    public boolean pesquisaRealizada(long atendimento, boolean respondido, float nota)  throws SQLException{
-        int ver = pesquisadao.realizarPesquisa(atendimento, respondido, nota);
+    public boolean pesquisaRealizada(int id, int atendimento, boolean respondido, float nota)  throws SQLException{
+        int ver = pesquisadao.realizarPesquisa(id, atendimento, respondido, nota);
         if(ver == 1){ return true; }
         return false;
     }

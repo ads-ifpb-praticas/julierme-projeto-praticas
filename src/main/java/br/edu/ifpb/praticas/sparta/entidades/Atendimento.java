@@ -19,7 +19,7 @@ public class Atendimento implements Serializable {
 
     @Id
     @GeneratedValue
-    private long codigo;
+    private int codigo;
     @Column(nullable = false)
     private int cliente;
     @Column(nullable = false)
@@ -37,7 +37,7 @@ public class Atendimento implements Serializable {
 
     public Atendimento(){ }
 
-    public Atendimento(long codigo, int cliente, int atendente, int tiposervico, Date data, Time horario, boolean confirmado){
+    public Atendimento(int codigo, int cliente, int atendente, int tiposervico, Date data, Time horario, boolean confirmado){
         this.codigo = codigo;
         this.cliente = cliente;
         this.atendente = atendente;
@@ -47,8 +47,8 @@ public class Atendimento implements Serializable {
         this.confirmado = confirmado;
     }
 
-    public long getCodigo() {return codigo;}
-    public void setCodigo(long codigo) {this.codigo = codigo;}
+    public int getCodigo() {return codigo;}
+    public void setCodigo(int codigo) {this.codigo = codigo;}
     public int getCliente() {return cliente;}
     public void setCliente(int cliente) {this.cliente = cliente;}
     public int getAtendente() {return atendente;}

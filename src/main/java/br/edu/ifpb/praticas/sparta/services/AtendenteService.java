@@ -24,8 +24,8 @@ public class AtendenteService{
     
     private AtendenteDAO atendao;
     
-    public void cadastrarAtendente(String nome, Date atendimento, Time hora_chegada, Time hora_saida) throws SQLException{
-        atendao.cadastrarAtendente(nome, atendimento, hora_chegada, hora_saida);
+    public void cadastrarAtendente(int matricula, String nome, Date atendimento, Time hora_chegada, Time hora_saida) throws SQLException{
+        atendao.cadastrarAtendente(matricula, nome, atendimento, hora_chegada, hora_saida);
     }
     
     public void removerAtendente(int matricula) throws SQLException{ atendao.removerAtendente(matricula); }

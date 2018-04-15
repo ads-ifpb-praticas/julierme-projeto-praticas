@@ -22,8 +22,8 @@ public class Service {
     
     private ServicoDAO servicodao;
     
-    public void cadastrarServico(int atendente, int duracao, String categoria)  throws SQLException{ servicodao.cadastrarServico(atendente,duracao, categoria); }
-    public void removerServico(long codigo)  throws SQLException{ servicodao.removerServico(codigo); }
+    public void cadastrarServico(int codigo, int duracao, String categoria)  throws SQLException{ servicodao.cadastrarServico(codigo, duracao, categoria); }
+    public void removerServico(int codigo)  throws SQLException{ servicodao.removerServico(codigo); }
     public List<Servico> buscarServico(String tipo)  throws SQLException{
         List<Row> list = servicodao.buscarServico(tipo);
         List<Servico> servicos = new ArrayList();

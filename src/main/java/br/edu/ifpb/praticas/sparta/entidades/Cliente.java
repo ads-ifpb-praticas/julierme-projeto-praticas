@@ -22,11 +22,6 @@ public class Cliente implements Serializable{
     private String email;
 
     public Cliente(){ }
-    
-    public Cliente(String nome, String email){
-        this.nome = nome;
-        this.email = email;
-    }
 
     public Cliente(int id, String nome, String email){
         this.id = id;

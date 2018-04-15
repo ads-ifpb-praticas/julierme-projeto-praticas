@@ -16,16 +16,15 @@ CREATE TABLE Cliente(
 ) WITH comment='Registro de clientes';
 
 CREATE TABLE Servico(
-	bigint codigo PRIMARY KEY,
-	int atendente PRIMARY KEY,
+	int codigo PRIMARY KEY,
 	int duracao NOT NULL,
 	text categoria NOT NULL
 ) WITH comment='Registro dos servicos';
 
 CREATE TABLE Atendimento(
-	bigint codigo,
+	int codigo,
 	int cliente,
-	bigint tiposervico NOT NULL,
+	int tiposervico NOT NULL,
 	Date data NOT NULL,
 	Time horario NOT NULL,
 	boolean confirmado,
@@ -33,8 +32,8 @@ CREATE TABLE Atendimento(
 ) WITH comment='Registro de atendimentos';
 
 CREATE TABLE Pesquisa(
-	bigint id,
-	bigint atendimento,
+	int id,
+	int atendimento,
 	boolean respondido NOT NULL,
 	float nota,
 	PRIMARY KEY (id, atendimento)
